@@ -16,12 +16,13 @@
         </div>
     </div>
 
-    @if (Model.Any())
+    @if (Model != null && Model.Any())
     {
         <div class="table-responsive">
             <table class="table table-striped table-hover">
                 <thead class="table-dark">
                     <tr>
+                        <th>Profile Picture</th>
                         <th>Full Name</th>
                         <th>Title</th>
                         <th>Email</th>
@@ -33,6 +34,17 @@
                     @foreach (var item in Model)
                     {
                         <tr>
+                            <td>
+
+                                @if (!string.IsNullOrEmpty(item.ProfileImageUrl))
+                                {
+                                    <img src="~/uploads/@item.ProfileImageUrl"
+                                         alt="Profile Image"
+                                         width="100"
+                                         height="100"
+                                          />
+                                }
+                            </td>
                             <td>@item.FullName</td>
                             <td>@item.Title</td>
                             <td>@item.Email</td>

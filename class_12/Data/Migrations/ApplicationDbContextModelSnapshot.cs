@@ -249,7 +249,7 @@ namespace class_12.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ContactMessages", (string)null);
+                    b.ToTable("ContactMessages");
                 });
 
             modelBuilder.Entity("class_12.Entities.Education", b =>
@@ -280,7 +280,7 @@ namespace class_12.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Educations", (string)null);
+                    b.ToTable("Educations");
                 });
 
             modelBuilder.Entity("class_12.Entities.Experience", b =>
@@ -311,7 +311,7 @@ namespace class_12.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Experiences", (string)null);
+                    b.ToTable("Experiences");
                 });
 
             modelBuilder.Entity("class_12.Entities.PersonalInfo", b =>
@@ -351,7 +351,6 @@ namespace class_12.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProfileImageUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
@@ -364,7 +363,7 @@ namespace class_12.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PersonalInfos", (string)null);
+                    b.ToTable("PersonalInfos");
                 });
 
             modelBuilder.Entity("class_12.Entities.Skill", b =>
@@ -388,7 +387,7 @@ namespace class_12.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Skills", (string)null);
+                    b.ToTable("Skills");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
