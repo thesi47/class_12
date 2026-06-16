@@ -6,9 +6,9 @@ namespace class_12.Models
     {
         public int Id { get; set; }
         [Required]
-        [Range(2,1000, ErrorMessage ="Name must be between 2 and 1000 characters")]
+        [StringLength(1000, ErrorMessage ="Name must be between 2 and 1000 characters")]
         public string Name { get; set; }
-        [Required(ErrorMessage ="email is required")]
+        [EmailAddress(ErrorMessage ="Following format is required: example@email.com")]
         public string Email { get; set; }
         public string Subject { get; set; }
         [Required(ErrorMessage ="Enter the Message....")]
