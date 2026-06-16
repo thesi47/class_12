@@ -1,3 +1,4 @@
+using class_12.Entities;
 using class_12.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -20,6 +21,11 @@ namespace class_12.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        [Route("Skill")]
+        public IActionResult Skill()
+        {
+            return View();
         }
     }
 }
