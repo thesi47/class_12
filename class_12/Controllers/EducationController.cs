@@ -1,5 +1,6 @@
 using class_12.Data;
 using class_12.Entities;
+using class_12.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,7 +16,7 @@ namespace class_12.Controllers
         public async Task<IActionResult> Index()
         {
             var data = await _context.Educations.ToListAsync();
-            return View(data);
+            return View(data ?? new List<Education>());
         }
         public IActionResult Create()
         {
@@ -23,15 +24,23 @@ namespace class_12.Controllers
         }
         [HttpPost]
 
-        public async Task<IActionResult> Create(Education education)
+        public async Task<IActionResult> Create(EducationVM education)
         {
             if (ModelState.IsValid)
             {
-                _context.Educations.Add(education);
+                var entity = new Education();
+
+                entity.Instituition = education.Instituition;
+                entity.Degree = education.Degree;
+                entity.FieldOfStudy = education.FieldOfStudy;
+                entity.StartDate = education.StartDate;
+                entity.EndDate = education.EndDate;
+
+                _context.Educations.Add(entity);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View();
+            return View(education);
         }
         public async Task<IActionResult> Edit(int id)
         {

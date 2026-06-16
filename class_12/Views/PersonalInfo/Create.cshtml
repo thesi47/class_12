@@ -1,4 +1,4 @@
-@model class_12.Entities.PersonalInfo
+@model class_12.Models.PersonalInfoVM
 
 @{
     ViewData["Title"] = "Add Personal Information";
@@ -66,9 +66,9 @@
                 </div>
 
                 <div class="mb-3">
-                    <label asp-for="ProfileImageUrl" class="form-label">Profile Image URL</label>
-                    <input asp-for="ProfileImageUrl" type="file" class="form-control" />
-                    <span asp-validation-for="ProfileImageUrl" class="text-danger"></span>
+                    <label asp-for="ProfileImage" class="form-label">Profile Image</label>
+                    <input asp-for="ProfileImage" type="file" class="form-control" />
+                    <span asp-validation-for="ProfileImage" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">

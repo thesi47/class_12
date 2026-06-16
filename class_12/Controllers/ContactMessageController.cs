@@ -1,5 +1,6 @@
 using class_12.Data;
 using class_12.Entities;
+using class_12.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,7 +16,7 @@ namespace class_12.Controllers
         public async Task<IActionResult> Index()
         {
             var data = await _context.ContactMessages.ToListAsync();
-            return View(data);
+            return View(data ?? new List<ContactMessage>());
         }
         public IActionResult Create()
         {
@@ -23,15 +24,23 @@ namespace class_12.Controllers
         }
         [HttpPost]
 
-        public async Task<IActionResult> Create(ContactMessage contactMessage)
+        public async Task<IActionResult> Create(ContactMessageVM contactMessageVM)
         {
             if (ModelState.IsValid)
             {
-                _context.ContactMessages.Add(contactMessage);
+                var entity = new ContactMessage();
+
+                entity.Name = contactMessageVM.Name;
+                entity.Email = contactMessageVM.Email;
+                entity.Subject = contactMessageVM.Subject;
+                entity.Message = contactMessageVM.Message;
+                entity.SentAt = DateTime.UtcNow;
+
+                _context.ContactMessages.Add(entity);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View();
+            return View(contactMessageVM);
         }
         public async Task<IActionResult> Edit(int id)
         {

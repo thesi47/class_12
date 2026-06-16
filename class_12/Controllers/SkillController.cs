@@ -2,6 +2,7 @@ using class_12.Data;
 using class_12.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using class_12.Models;
 
 namespace class_12.Controllers
 {
@@ -15,7 +16,7 @@ namespace class_12.Controllers
         public async Task<IActionResult> Index()
         {
             var data = await _context.Skills.ToListAsync();
-            return View(data);
+            return View(data ?? new List<Skill>());
         }
         public IActionResult Create()
         {
@@ -23,15 +24,21 @@ namespace class_12.Controllers
         }
         [HttpPost]
 
-        public async Task<IActionResult> Create(Skill skill)
+        public async Task<IActionResult> Create(SkillVM skillVM)
         {
             if (ModelState.IsValid)
             {
-                _context.Skills.Add(skill);
+                var entity = new Skill();
+
+                entity.Name = skillVM.Name;
+                entity.ProficiencyLevel = skillVM.ProficiencyLevel;
+                entity.Category = skillVM.Category;
+
+                _context.Skills.Add(entity);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View();
+            return View(skillVM);
         }
         public async Task<IActionResult> Edit(int id)
         {

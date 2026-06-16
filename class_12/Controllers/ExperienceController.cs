@@ -1,5 +1,6 @@
 using class_12.Data;
 using class_12.Entities;
+using class_12.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,7 +16,7 @@ namespace class_12.Controllers
         public async Task<IActionResult> Index()
         {
             var data = await _context.Experiences.ToListAsync();
-            return View(data);
+            return View(data ?? new List<Experience>());
         }
         public IActionResult Create()
         {
@@ -23,11 +24,18 @@ namespace class_12.Controllers
         }
         [HttpPost]
 
-        public async Task<IActionResult> Create(Experience experience)
+        public async Task<IActionResult> Create(ExperienceVM experience)
         {
             if (ModelState.IsValid)
             {
-                _context.Experiences.Add(experience);
+                var entity = new Experience();
+                entity.Company = experience.Company;
+                entity.Description = experience.Description;
+                entity.Role = experience.Role;
+                entity.Startdate = experience.Startdate;
+                entity.EndDate = experience.EndDate;
+
+                _context.Experiences.Add(entity);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

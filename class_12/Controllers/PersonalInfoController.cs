@@ -25,7 +25,7 @@ namespace class_12.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(PersonalInfoVM personalInfoVM)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 var entity = new PersonalInfo();
 
@@ -53,22 +53,26 @@ namespace class_12.Controllers
                         Directory.CreateDirectory(folder);
                     }
 
-                    string fileName = Guid.NewGuid() +
+                    string fileName = Guid.NewGuid().ToString() +
                                       Path.GetExtension(personalInfoVM.ProfileImage.FileName);
 
-                    string filePath = Path.Combine(folder, fileName);
+                    string path = Path.Combine(folder, fileName);
 
-                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    using (var stream = new FileStream(path, FileMode.Create))
                     {
                         await personalInfoVM.ProfileImage.CopyToAsync(stream);
                     }
 
                     entity.ProfileImageUrl = fileName;
                 }
+                else
+                {
+                    entity.ProfileImageUrl = personalInfoVM.ProfileImageUrl;
+
+                }
 
                 _context.PersonalInfos.Add(entity);
                 await _context.SaveChangesAsync();
-
                 return RedirectToAction(nameof(Index));
             }
 
