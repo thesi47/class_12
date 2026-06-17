@@ -22,10 +22,5 @@ namespace class_12.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        [Route("Skill")]
-        public IActionResult Skill()
-        {
-            return View();
-        }
     }
 }
