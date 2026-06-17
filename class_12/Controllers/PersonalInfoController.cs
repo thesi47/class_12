@@ -40,7 +40,6 @@ namespace class_12.Controllers
                 entity.Github = personalInfoVM.Github;
                 entity.Bio = personalInfoVM.Bio;
                
-
                 if (personalInfoVM.ProfileImage != null)
                 {
                     string folder = Path.Combine(
