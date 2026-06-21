@@ -62,7 +62,7 @@ namespace class_12.Controllers
                         await personalInfoVM.ProfileImage.CopyToAsync(stream);
                     }
 
-                    entity.ProfileImageUrl = fileName;
+                    entity.ProfileImageUrl = "/uploads/" + fileName;
                 }
                 else
                 {

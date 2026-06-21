@@ -1,4 +1,5 @@
-﻿namespace class_12.Entities
+﻿using class_12.Entities;
+namespace class_12.Models
 {
     public class PortfolioVM
     {
