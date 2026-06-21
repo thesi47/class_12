@@ -39,7 +39,7 @@ namespace class_12.Controllers
                 entity.LinkedIn = personalInfoVM.LinkedIn;
                 entity.Github = personalInfoVM.Github;
                 entity.Bio = personalInfoVM.Bio;
-               
+
                 if (personalInfoVM.ProfileImage != null)
                 {
                     string folder = Path.Combine(
@@ -81,7 +81,7 @@ namespace class_12.Controllers
         {
             var personalInfo = await _context.PersonalInfos.FindAsync(id);
             return View(personalInfo);
-            
+
         }
 
         [HttpPost]
@@ -111,5 +111,19 @@ namespace class_12.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
-    }
+
+        public async Task<IActionResult> Portfolio()
+        {
+            var model = new PortfolioVM()
+            {
+                PersonalInfo = await _context.PersonalInfos.FirstOrDefaultAsync(),
+                Experiences = await _context.Experiences.ToListAsync(),
+                Educations = await _context.Educations.ToListAsync(),
+                Skills = await _context.Skills.ToListAsync()
+            };
+            return View(model);
+        }
+
+
+}
 }

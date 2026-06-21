@@ -9,10 +9,10 @@ using class_12.Data;
 
 #nullable disable
 
-namespace class_12.Data.Migrations
+namespace class_12.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260614102309_Initial-Create")]
+    [Migration("20260620082611_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -354,7 +354,6 @@ namespace class_12.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProfileImageUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")

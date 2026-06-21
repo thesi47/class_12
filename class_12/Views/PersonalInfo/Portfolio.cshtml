@@ -1,0 +1,78 @@
+﻿@model class_12.Models.PortfolioVM
+
+@{
+    ViewData["Title"] = "Portfolio";
+}
+
+<div class="container">
+
+    <!-- Personal Information -->
+    @if (Model.PersonalInfo != null)
+    {
+        <section class="mb-5">
+            <h1>@Model.PersonalInfo.Name</h1>
+            <p>@Model.PersonalInfo.Email</p>
+            <p>@Model.PersonalInfo.Phone</p>
+            <p>@Model.PersonalInfo.Address</p>
+            <hr />
+        </section>
+    }
+
+    <!-- Experience -->
+    <section class="mb-5">
+        <h2>Experience</h2>
+
+        @if (Model.Experiences.Any())
+        {
+            @foreach (var exp in Model.Experiences)
+            {
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h4>@exp.JobTitle</h4>
+                        <h5>@exp.CompanyName</h5>
+                        <p>
+                            @exp.StartDate -
+                            @(exp.EndDate?.ToString() ?? "Present")
+                        </p>
+                        <p>@exp.Description</p>
+                    </div>
+                </div>
+            }
+        }
+    </section>
+
+    <!-- Education -->
+    <section class="mb-5">
+        <h2>Education</h2>
+
+        @if (Model.Educations.Any())
+        {
+            @foreach (var edu in Model.Educations)
+            {
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h4>@edu.Degree</h4>
+                        <h5>@edu.Institution</h5>
+                        <p>@edu.Year</p>
+                    </div>
+                </div>
+            }
+        }
+    </section>
+
+    <!-- Skills -->
+    <section class="mb-5">
+        <h2>Skills</h2>
+
+        @if (Model.Skills.Any())
+        {
+            <ul>
+                @foreach (var skill in Model.Skills)
+                {
+                    <li>@skill.Name</li>
+                }
+            </ul>
+        }
+    </section>
+
+</div>
